@@ -15,9 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onBtnClicked(View v){
+    public void onButtonClick(View v){
         if(v.getId() == R.id.level1Btn){
             Intent intent = new Intent(this, QuartasGameActivity.class);
+            startActivity(intent);
         }
     }
 }
