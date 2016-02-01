@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MusicGame</string>
+    <string name="title_activity_quartas_game">QuartasGameActivity</string>
 </resources>

@@ -70,9 +70,10 @@ public class Note {
             case 9:
                 return "A";
             case 10:
-                return "A#;
+                return "A#";
             case 11:
                 return "B";
         }
+        return null;
     }
 }
