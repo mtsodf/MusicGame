@@ -11,13 +11,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
 
     public void onButtonClick(View v){
         if(v.getId() == R.id.level1Btn){
-            Intent intent = new Intent(this, QuartasGameActivity.class);
+            Intent intent = new Intent(this, GameActivity.class);
             startActivity(intent);
         }
     }

@@ -26,7 +26,7 @@ public class Note {
     int note;
 
     public Note(int note){
-        this.note = note;
+        this.note = note % 12;
     }
 
 
