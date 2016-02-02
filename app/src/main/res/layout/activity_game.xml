@@ -7,35 +7,69 @@
 
     android:orientation="vertical"
     >
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/header"
-            />
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/QuestionView"
+        android:layout_height="100dp"
         >
 
+        <TextView
+            android:id="@+id/questionsView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Qual a quarta da nota?"
+
+            android:textSize="@dimen/abc_dropdownitem_icon_width"
+            android:textColor="#040404" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:layout_weight="3"
         android:background="@color/colorPrimary"
-        android:id="@+id/AnswerView"
-        ></LinearLayout>
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/answer1View"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:text="Resposta 1"
+            android:onClick="onButtonClick"
+            />
+
+        <TextView
+            android:id="@+id/answer2View"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Resposta 2"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:onClick="onButtonClick"
+
+            />
+        <TextView
+            android:id="@+id/answer3View"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Resposta 3"
+            android:textColor="@color/white"
+            android:textSize="50dp"
+            android:onClick="onButtonClick"
+            />
+
+    </LinearLayout>
 
 
 </LinearLayout>
