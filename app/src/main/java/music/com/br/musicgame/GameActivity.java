@@ -68,6 +68,8 @@ public class GameActivity extends Activity {
         noteGame.newPhase();
 
         questionView.setText(noteGame.question);
+        noteView.setText(noteGame.currentNote.toString());
+
 
         setAnswers();
     }
@@ -80,6 +82,7 @@ public class GameActivity extends Activity {
 
     private void getReferenceToViews() {
         questionView = (TextView) findViewById(R.id.questionsView);
+        noteView = (TextView) findViewById(R.id.noteView);
         answer1View = (TextView) findViewById(R.id.answer1View);
         answer2View = (TextView) findViewById(R.id.answer2View);
         answer3View = (TextView) findViewById(R.id.answer3View);
@@ -128,17 +131,12 @@ public class GameActivity extends Activity {
         else
             t.setTextColor(Color.GREEN);
 
-        try {
-            wait(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         t.setTextColor(Color.BLACK);
 
     }
 
-    TextView questionView, answer1View, answer2View, answer3View;
+    TextView questionView, noteView, answer1View, answer2View, answer3View;
 
     @Override
     public void onStop() {
