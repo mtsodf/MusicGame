@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -123,16 +124,29 @@ public class GameActivity extends Activity {
 
     }
 
-    private void setTextColor(View v, int i) {
-        TextView t = (TextView) v;
+    private void setTextColor(View v, final int i) {
+       final  TextView t = (TextView) v;
 
-        if (i == 0)
-            t.setTextColor(Color.RED);
-        else
-            t.setTextColor(Color.GREEN);
+        new CountDownTimer(1000,2000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                if (i == 0)
+                    t.setTextColor(Color.RED);
+                else
+                    t.setTextColor(Color.GREEN);
+            }
+
+            @Override
+            public void onFinish() {
+                t.setTextColor(Color.BLACK);
+            }
+        };
 
 
-        t.setTextColor(Color.BLACK);
+
+
 
     }
 
