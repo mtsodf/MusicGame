@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/cronometerView"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:gravity="center_vertical|left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pointsCount"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/questionsView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Qual a quarta da nota?"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textColor="#040404" />
+
+        <TextView
+            android:id="@+id/noteView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Test"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+        <TextView
+            android:id="@+id/answer1View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:text="Resposta 1"
+            android:layout_weight="1"
+            android:onClick="onButtonClick" />
+
+        <TextView
+            android:id="@+id/answer2View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resposta 2"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:onClick="onButtonClick"
+            android:layout_weight="1"
+
+            />
+        <TextView
+            android:id="@+id/answer3View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Resposta 3"
+            android:textColor="@color/white"
+            android:textSize="50dp"
+            android:onClick="onButtonClick"
+            android:layout_weight="1"
+            />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

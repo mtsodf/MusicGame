@@ -10,9 +10,12 @@
     tools:context="music.com.br.musicgame.MainActivity">
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Your Mode!" />
+        android:text="Select Your Mode!"
+        android:textSize="30dp"
+        />
 
     <Button
         android:id="@+id/level1Btn"
@@ -20,5 +23,6 @@
         android:layout_height="wrap_content"
         android:text="Level 1"
         android:onClick="onButtonClick"
+        android:layout_below="@id/text"
         />
 </RelativeLayout>

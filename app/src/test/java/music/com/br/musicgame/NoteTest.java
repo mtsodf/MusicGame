@@ -30,7 +30,15 @@ public class NoteTest {
         assertEquals(note.quarta().toString(), "F");
         assertEquals(note.quinta().toString(), "G");
 
+    }
 
+    @Test
+    public void NoteEquals(){
+        for(int i = 0; i < 12; i++)
+            for(int j = 0; j < 3; j ++){
+                assertEquals(new Note(i), new Note(12*j+i));
+                assertEquals(new Note(12*j+i), new Note(i));
+            }
 
     }
 }

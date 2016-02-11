@@ -76,4 +76,23 @@ public class Note {
         }
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null){
+            return false;
+        }
+
+        if(o == this){
+            return true;
+        }
+
+        if(!(o instanceof Note)){
+            return false;
+        }
+
+        Note noteO = (Note) o;
+
+        return this.note ==  noteO.note;
+    }
 }

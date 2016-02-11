@@ -36,14 +36,14 @@ public abstract class Jogo {
 
         while (currentAlternatives.size() < 3) {
             int randomInt = random.nextInt(12);
-            if (randomInt != currentNote.note) {
-                Note newNote = new Note(randomInt);
+            Note newNote = new Note(randomInt);
+            if (randomInt != currentNote.note && randomInt != currentAnswer.note && !currentAlternatives.contains(newNote)) {
                 currentAlternatives.add(newNote);
             }
 
         }
 
-        currentAlternatives.add(random.nextInt(3), currentNote);
+        currentAlternatives.add(random.nextInt(3), currentAnswer);
 
     }
 

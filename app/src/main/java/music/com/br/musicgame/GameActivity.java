@@ -3,9 +3,11 @@ package music.com.br.musicgame;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +23,28 @@ import music.com.br.musicgame.entities.NoteGame;
 public class GameActivity extends Activity {
 
     Jogo noteGame;
+
+    private static final int WAITING_ANSWER = 0;
+
+    private static final int BUTTON_PRESSED = 1;
+
+    int state = WAITING_ANSWER;
+
+    MediaPlayer correctSound, wrongSound;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
 
+    private static final int WRONG = 0;
 
+    private static final int CORRECT = 1;
+
+    private CountDownTimer cronometer;
+
+    private int correctAnswers = 0;
+    private int wrongAnswers = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +66,7 @@ public class GameActivity extends Activity {
         getReferenceToViews();
 
 
-        criarNovoJogo();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
@@ -62,7 +79,42 @@ public class GameActivity extends Activity {
                 // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://music.com.br.musicgame/http/host/path")
         );
+
+        criarNovoJogo();
+        correctSound =  MediaPlayer.create(this, R.raw.chime_bell_ding);
+        wrongSound = MediaPlayer.create(this, R.raw.beep_short_off);
+
         AppIndex.AppIndexApi.start(client, viewAction);
+
+        final TextView textViewCronometer = (TextView) findViewById(R.id.cronometerView);
+
+
+        if(cronometer!=null){
+            cronometer.cancel();
+        }
+
+
+        cronometer = new CountDownTimer(20000, 100) {
+
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long seconds = millisUntilFinished / 1000;
+                long centseconds = (millisUntilFinished % 1000) / 100;
+
+                textViewCronometer.setText(seconds + "." + centseconds);
+            }
+
+            @Override
+            public void onFinish() {
+                textViewCronometer.setText("0.0");
+
+            }
+        };
+
+        cronometer.start();
+        Log.d("GameActivity", "chamou metodo on start.");
+
     }
 
     private void criarNovoJogo() {
@@ -89,36 +141,35 @@ public class GameActivity extends Activity {
         answer3View = (TextView) findViewById(R.id.answer3View);
     }
 
-    public void onButtonClick(View v) {
+    public synchronized void onButtonClick(View v) {
 
-        if (v.getId() == R.id.answer1View) {
-            if (noteGame.rightAnswer(noteGame.currentAlternatives.get(0))) {
-                setTextColor(v, 0);
-            } else {
-                setTextColor(v, 1);
+        if(state == WAITING_ANSWER) {
+            state = BUTTON_PRESSED;
+            if (v.getId() == R.id.answer1View) {
+                if (noteGame.rightAnswer(noteGame.currentAlternatives.get(0))) {
+                    setTextColor(v, CORRECT);
+                } else {
+                    setTextColor(v, WRONG);
+                }
+                return;
             }
-            criarNovoJogo();
-            return;
-        }
-        if (v.getId() == R.id.answer2View) {
-            if (noteGame.rightAnswer(noteGame.currentAlternatives.get(1))) {
-                setTextColor(v, 0);
-            } else {
-                setTextColor(v, 1);
-            }
-            criarNovoJogo();
-            return;
+            if (v.getId() == R.id.answer2View) {
+                if (noteGame.rightAnswer(noteGame.currentAlternatives.get(1))) {
+                    setTextColor(v, CORRECT);
+                } else {
+                    setTextColor(v, WRONG);
+                }
+                return;
 
-        }
-        if (v.getId() == R.id.answer3View) {
-            if (noteGame.rightAnswer(noteGame.currentAlternatives.get(2))) {
-                setTextColor(v, 0);
-            } else {
-                setTextColor(v, 1);
             }
-            criarNovoJogo();
-            return;
-
+            if (v.getId() == R.id.answer3View) {
+                if (noteGame.rightAnswer(noteGame.currentAlternatives.get(2))) {
+                    setTextColor(v, CORRECT);
+                } else {
+                    setTextColor(v, WRONG);
+                }
+                return;
+            }
         }
 
 
@@ -127,27 +178,49 @@ public class GameActivity extends Activity {
     private void setTextColor(View v, final int i) {
        final  TextView t = (TextView) v;
 
-        new CountDownTimer(1000,2000){
+        if(i == WRONG){
+            wrongSound.start();
+            wrongAnswers++;
+        } else{
+            correctSound.start();
+            correctAnswers++;
 
+        }
+
+        setPoints();
+
+        new CountDownTimer(500,100){
+            boolean alreadyRun = false;
             @Override
             public void onTick(long millisUntilFinished) {
+                if(!alreadyRun) {
 
-                if (i == 0)
-                    t.setTextColor(Color.RED);
-                else
-                    t.setTextColor(Color.GREEN);
+                    if (i == WRONG) {
+                        Log.d("GameActivity", "Marcar de Vermelho.");
+                        t.setTextColor(Color.RED);
+                    } else {
+                        Log.d("GameActivity", "Marcar de Verde.");
+                        t.setTextColor(Color.GREEN);
+                    }
+                }
+
+                alreadyRun = true;
+
             }
 
             @Override
             public void onFinish() {
-                t.setTextColor(Color.BLACK);
+                state = WAITING_ANSWER;
+                Log.d("GameActivity", "Marcar de Branco.");
+                t.setTextColor(Color.WHITE);
+                criarNovoJogo();
             }
-        };
+        }.start();
 
+    }
 
-
-
-
+    private void setPoints() {
+        TextView pointsView = (TextView) findViewById(R.id.)
     }
 
     TextView questionView, noteView, answer1View, answer2View, answer3View;
@@ -170,5 +243,7 @@ public class GameActivity extends Activity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+
+        Log.d("GameActivity", "chamou on stop.");
     }
 }
