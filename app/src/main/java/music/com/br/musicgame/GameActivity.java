@@ -1,7 +1,8 @@
 package music.com.br.musicgame;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -17,7 +17,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import music.com.br.musicgame.entities.Jogo;
-import music.com.br.musicgame.entities.Note;
 import music.com.br.musicgame.entities.NoteGame;
 
 public class GameActivity extends Activity {
@@ -25,8 +24,8 @@ public class GameActivity extends Activity {
     Jogo noteGame;
 
     private static final int WAITING_ANSWER = 0;
-
     private static final int BUTTON_PRESSED = 1;
+    private static final int GAME_END = 2;
 
     int state = WAITING_ANSWER;
 
@@ -80,20 +79,27 @@ public class GameActivity extends Activity {
                 Uri.parse("android-app://music.com.br.musicgame/http/host/path")
         );
 
-        criarNovoJogo();
+
         correctSound =  MediaPlayer.create(this, R.raw.chime_bell_ding);
         wrongSound = MediaPlayer.create(this, R.raw.beep_short_off);
 
         AppIndex.AppIndexApi.start(client, viewAction);
 
-        final TextView textViewCronometer = (TextView) findViewById(R.id.cronometerView);
+        initiateGame();
 
+
+
+        Log.d("GameActivity", "chamou metodo on start.");
+
+    }
+
+    private void startCronomoter() {
+
+        final TextView textViewCronometer = (TextView) findViewById(R.id.cronometerView);
 
         if(cronometer!=null){
             cronometer.cancel();
         }
-
-
         cronometer = new CountDownTimer(20000, 100) {
 
 
@@ -109,21 +115,44 @@ public class GameActivity extends Activity {
             public void onFinish() {
                 textViewCronometer.setText("0.0");
 
+                endOfTheGame();
             }
         };
-
         cronometer.start();
-        Log.d("GameActivity", "chamou metodo on start.");
-
     }
 
-    private void criarNovoJogo() {
+    private void endOfTheGame() {
+        state = GAME_END;
+        new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage("Your pontuation was " + calculatePoints() + ". Do you want to play again?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                initiateGame();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                GameActivity.this.finish();
+            }
+        }).show();
+    }
+
+    private void initiateGame(){
+        state = WAITING_ANSWER;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        generateNewQuestion();
+        startCronomoter();
+    }
+
+    private void generateNewQuestion() {
         noteGame.newPhase();
 
         questionView.setText(noteGame.question);
         noteView.setText(noteGame.currentNote.toString());
 
-
+        setPoints();
         setAnswers();
     }
 
@@ -139,6 +168,7 @@ public class GameActivity extends Activity {
         answer1View = (TextView) findViewById(R.id.answer1View);
         answer2View = (TextView) findViewById(R.id.answer2View);
         answer3View = (TextView) findViewById(R.id.answer3View);
+
     }
 
     public synchronized void onButtonClick(View v) {
@@ -213,14 +243,20 @@ public class GameActivity extends Activity {
                 state = WAITING_ANSWER;
                 Log.d("GameActivity", "Marcar de Branco.");
                 t.setTextColor(Color.WHITE);
-                criarNovoJogo();
+                generateNewQuestion();
             }
         }.start();
 
     }
 
     private void setPoints() {
-        TextView pointsView = (TextView) findViewById(R.id.)
+        TextView pointsView = (TextView) findViewById(R.id.pointsCount);
+        pointsView.setText("Points: " + calculatePoints());
+    }
+
+    private int calculatePoints() {
+        int points = correctAnswers - 2*wrongAnswers;
+        return points > 0 ? points : 0;
     }
 
     TextView questionView, noteView, answer1View, answer2View, answer3View;
