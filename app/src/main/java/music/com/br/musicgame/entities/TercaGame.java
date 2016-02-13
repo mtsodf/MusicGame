@@ -10,7 +10,7 @@ public class TercaGame extends Game {
 
     @Override
     protected Note generateAnswer() {
-        return currentAnswer.terca();
+        return currentNote.terca();
     }
 
     @Override

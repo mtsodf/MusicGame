@@ -18,11 +18,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import music.com.br.musicgame.entities.Game;
 import music.com.br.musicgame.entities.QuartasGame;
+import music.com.br.musicgame.entities.TercaGame;
 
 public class GameActivity extends Activity {
 
     Game noteGame;
 
+    /*
+    Constants of screen state.
+     */
     private static final int WAITING_ANSWER = 0;
     private static final int BUTTON_PRESSED = 1;
     private static final int GAME_END = 2;
@@ -37,12 +41,11 @@ public class GameActivity extends Activity {
     private GoogleApiClient client;
 
     private static final int WRONG = 0;
-
     private static final int CORRECT = 1;
 
     private CountDownTimer cronometer;
-
     private int points;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +62,11 @@ public class GameActivity extends Activity {
 
         if(stringExtra.equals(MainActivity.QUARTAS_GAME)){
             return new QuartasGame();
+        } else if(stringExtra.equals(MainActivity.TERCA_GAME)){
+            return new TercaGame();
         }
 
+        Log.d(this.getPackageName(), "No Game Returned");
         return null;
     }
 
@@ -94,8 +100,6 @@ public class GameActivity extends Activity {
         AppIndex.AppIndexApi.start(client, viewAction);
 
         initiateGame();
-
-
 
         Log.d("GameActivity", "chamou metodo on start.");
 

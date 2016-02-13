@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">MusicGame</string>
+    <string name="app_name">Music Game</string>
     <string name="title_activity_quartas_game">QuartasGameActivity</string>
     <string name="header">Level </string>
     <string name="TercaGameQuestion"> "Which is the terca note of?"</string>
     <string name="QuartaGameQuestion"> Which is the forth note of?"</string>
     <string name="finishDialogTitle">Game Finished!</string>
     <string name="finishQuestion">Your pontuation was {1}. Do you want to play again?</string>
+    <string name="selectText">Select Your Mode!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 </resources>

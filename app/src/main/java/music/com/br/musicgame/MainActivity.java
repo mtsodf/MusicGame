@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static final String QUARTAS_GAME = "QUARTAS_GAME";
+    public static final String TERCA_GAME = "TERCA_GAME";
 
     public static Context mContext;
 
@@ -29,9 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void onButtonClick(View v){
         if(v.getId() == R.id.level1Btn){
-            Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra(GAME_NAME, QUARTAS_GAME);
-            startActivity(intent);
+            startGame(QUARTAS_GAME);
+        }else if(v.getId() == R.id.level2Btn){
+            startGame(TERCA_GAME);
         }
+    }
+
+    private void startGame(String gameName) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GAME_NAME, gameName);
+        startActivity(intent);
     }
 }

@@ -7,6 +7,7 @@
     <string name="QuartaGameQuestion"> Qual a quarta da nota?"</string>
     <string name="finishDialogTitle">Jogo acabou!</string>
     <string name="finishQuestion">Sua pontuacao foi {1}. Você jogar de novo?</string>
+    <string name="selectText">Selecione seu Modo!</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
 </resources>
