@@ -131,13 +131,13 @@ public class GameActivity extends Activity {
 
     private void endOfTheGame() {
         state = GAME_END;
-        new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage("Your pontuation was " + points + ". Do you want to play again?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage(getString(R.string.finishQuestion).replace("{1}", points + "")).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
                 initiateGame();
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

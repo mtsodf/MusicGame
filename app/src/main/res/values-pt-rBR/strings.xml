@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jogo Musica</string>
+    <string name="title_activity_quartas_game">QuartasGameActivity</string>
+    <string name="header">Nível </string>
+    <string name="TercaGameQuestion"> Qual a terça da nota?</string>
+    <string name="QuartaGameQuestion"> Qual a quarta da nota?"</string>
+    <string name="finishDialogTitle">Jogo acabou!</string>
+    <string name="finishQuestion">Sua pontuacao foi {1}. Você jogar de novo?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+</resources>
