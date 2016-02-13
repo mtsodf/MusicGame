@@ -42,8 +42,7 @@ public class GameActivity extends Activity {
 
     private CountDownTimer cronometer;
 
-    private int correctAnswers = 0;
-    private int wrongAnswers = 0;
+    private int points;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +122,7 @@ public class GameActivity extends Activity {
 
     private void endOfTheGame() {
         state = GAME_END;
-        new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage("Your pontuation was " + calculatePoints() + ". Do you want to play again?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage("Your pontuation was " + points + ". Do you want to play again?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -140,8 +139,7 @@ public class GameActivity extends Activity {
 
     private void initiateGame(){
         state = WAITING_ANSWER;
-        correctAnswers = 0;
-        wrongAnswers = 0;
+        points = 0;
         generateNewQuestion();
         startCronomoter();
     }
@@ -210,11 +208,12 @@ public class GameActivity extends Activity {
 
         if(i == WRONG){
             wrongSound.start();
-            wrongAnswers++;
+            points = points > 2? points-2:0;
+
         } else{
             correctSound.start();
-            correctAnswers++;
 
+            points++;
         }
 
         setPoints();
@@ -251,13 +250,10 @@ public class GameActivity extends Activity {
 
     private void setPoints() {
         TextView pointsView = (TextView) findViewById(R.id.pointsCount);
-        pointsView.setText("Points: " + calculatePoints());
+        pointsView.setText("Points: " + points);
     }
 
-    private int calculatePoints() {
-        int points = correctAnswers - 2*wrongAnswers;
-        return points > 0 ? points : 0;
-    }
+
 
     TextView questionView, noteView, answer1View, answer2View, answer3View;
 
