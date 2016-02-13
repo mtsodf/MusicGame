@@ -32,7 +32,7 @@ public abstract class Game {
 
         question = generateQuestion();
 
-        currentAnswer = generateAnswer();
+        currentAnswer = getAnswer();
 
         while (currentAlternatives.size() < 3) {
             int randomInt = random.nextInt(12);
@@ -47,7 +47,7 @@ public abstract class Game {
 
     }
 
-    protected abstract Note generateAnswer();
+    protected abstract Note getAnswer();
 
     public boolean rightAnswer(Note answer) {
         return answer.note == currentAnswer.note;

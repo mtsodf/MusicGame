@@ -9,7 +9,7 @@ import music.com.br.musicgame.R;
 public class TercaGame extends Game {
 
     @Override
-    protected Note generateAnswer() {
+    protected Note getAnswer() {
         return currentNote.terca();
     }
 

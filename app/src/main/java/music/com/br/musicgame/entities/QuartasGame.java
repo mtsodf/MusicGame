@@ -11,7 +11,7 @@ public class QuartasGame extends Game {
 
 
     @Override
-    protected Note generateAnswer() {
+    protected Note getAnswer() {
         return currentNote.quarta();
     }
 
