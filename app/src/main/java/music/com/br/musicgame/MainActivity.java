@@ -7,6 +7,11 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String GAME_NAME = "music.com.br.musicgame.MainActivity.gamename";
+
+
+    public static final String QUARTAS_GAME = "QUARTAS_GAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public void onButtonClick(View v){
         if(v.getId() == R.id.level1Btn){
             Intent intent = new Intent(this, GameActivity.class);
+            intent.putExtra(GAME_NAME, QUARTAS_GAME);
             startActivity(intent);
         }
     }

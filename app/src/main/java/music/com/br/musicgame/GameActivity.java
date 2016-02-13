@@ -16,12 +16,12 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import music.com.br.musicgame.entities.Jogo;
-import music.com.br.musicgame.entities.NoteGame;
+import music.com.br.musicgame.entities.Game;
+import music.com.br.musicgame.entities.QuartasGame;
 
 public class GameActivity extends Activity {
 
-    Jogo noteGame;
+    Game noteGame;
 
     private static final int WAITING_ANSWER = 0;
     private static final int BUTTON_PRESSED = 1;
@@ -48,11 +48,20 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        noteGame = new NoteGame();
+        noteGame = getGame(getIntent().getStringExtra(MainActivity.GAME_NAME));
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private Game getGame(String stringExtra) {
+
+        if(stringExtra.equals(MainActivity.QUARTAS_GAME)){
+            return new QuartasGame();
+        }
+
+        return null;
     }
 
     @Override

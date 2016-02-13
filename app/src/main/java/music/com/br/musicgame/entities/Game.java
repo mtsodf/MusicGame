@@ -7,9 +7,9 @@ import java.util.Random;
 /**
  * Created by mtsodf on 01/02/16.
  */
-public abstract class Jogo {
+public abstract class Game {
 
-    public Jogo() {
+    public Game() {
         random = new Random();
     }
 

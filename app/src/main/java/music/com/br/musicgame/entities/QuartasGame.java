@@ -1,13 +1,9 @@
 package music.com.br.musicgame.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 /**
  * Created by Mateus on 01/02/2016.
  */
-public class NoteGame extends Jogo{
+public class QuartasGame extends Game {
 
 
     @Override
