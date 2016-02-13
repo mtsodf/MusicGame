@@ -161,10 +161,16 @@ public class GameActivity extends Activity {
         noteGame.newPhase();
 
         questionView.setText(noteGame.question);
-        noteView.setText(noteGame.currentNote.toString());
+        setCurrentNote();
 
         setPoints();
         setAnswers();
+    }
+
+    private void setCurrentNote() {
+        noteView.
+
+                setText(noteGame.currentNote.toString());
     }
 
     private void setAnswers() {

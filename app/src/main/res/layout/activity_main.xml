@@ -45,4 +45,13 @@
         android:onClick="onButtonClick"
         android:layout_below="@id/text"
         />
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teste Button"
+        android:onClick="onButtonClick"
+        android:layout_below="@id/text"
+        />
 </LinearLayout>

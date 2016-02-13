@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
             startGame(TERCA_GAME);
         } else if(v.getId() == R.id.level3Btn){
             startGame(TERCA_QUARTA_GAME);
+        }else if(v.getId() == R.id.testButton){
+           Intent intent = new Intent(this,TesteActivity.class);
+
+            startActivity(intent);
         }
     }
 

@@ -9,4 +9,5 @@
     <string name="selectText">Select Your Mode!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="title_activity_teste">TesteActivity</string>
 </resources>
