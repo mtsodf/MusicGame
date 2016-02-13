@@ -36,4 +36,13 @@
         android:onClick="onButtonClick"
         android:layout_below="@id/text"
         />
+
+    <Button
+        android:id="@+id/level3Btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Level 3"
+        android:onClick="onButtonClick"
+        android:layout_below="@id/text"
+        />
 </LinearLayout>

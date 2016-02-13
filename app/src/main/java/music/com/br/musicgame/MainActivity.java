@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String QUARTAS_GAME = "QUARTAS_GAME";
     public static final String TERCA_GAME = "TERCA_GAME";
+    private static final String TERCA_QUARTA_GAME = "TERCA_QUARTA_GAME" ;
 
     public static Context mContext;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             startGame(QUARTAS_GAME);
         }else if(v.getId() == R.id.level2Btn){
             startGame(TERCA_GAME);
+        } else if(v.getId() == R.id.level3Btn){
+            startGame(TERCA_QUARTA_GAME);
         }
     }
 
