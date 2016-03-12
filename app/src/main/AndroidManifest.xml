@@ -27,7 +27,8 @@
         <activity
             android:name=".TesteActivity"
             android:label="@string/title_activity_teste"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RecordActivity"></activity>
     </application>
 
 </manifest>

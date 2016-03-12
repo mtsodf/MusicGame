@@ -85,5 +85,12 @@ public class NoteTest {
         stringRecordHandle.addRecord(20);
 
         assertEquals(stringRecordHandle.getRecordString(), "20;20;20;20;20;20;20;20;10;6;");
+
+        stringRecordHandle = new StringRecordHandle("");
+
+        stringRecordHandle.addRecord(10);
+        assertEquals("10;", stringRecordHandle.getRecordString());
+        stringRecordHandle.addRecord(11);
+        assertEquals("11;10;", stringRecordHandle.getRecordString());
     }
 }

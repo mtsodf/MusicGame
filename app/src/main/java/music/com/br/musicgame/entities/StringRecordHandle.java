@@ -22,7 +22,13 @@ public class StringRecordHandle {
         List<Integer> scores = new ArrayList<>();
 
         for(String s : records.split(separator)) {
-            scores.add(Integer.parseInt(s));
+            try{
+                scores.add(Integer.parseInt(s));
+            } catch (NumberFormatException e )
+            {
+
+            }
+
         }
 
         Collections.sort(scores,Collections.reverseOrder());

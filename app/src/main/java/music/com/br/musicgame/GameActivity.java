@@ -22,6 +22,7 @@ import music.com.br.musicgame.entities.Game;
 import music.com.br.musicgame.entities.QuartasGame;
 import music.com.br.musicgame.entities.StringRecordHandle;
 import music.com.br.musicgame.entities.TercaGame;
+import music.com.br.musicgame.entities.TercaQuartaGame;
 
 public class GameActivity extends Activity {
 
@@ -67,6 +68,8 @@ public class GameActivity extends Activity {
             return new QuartasGame();
         } else if(stringExtra.equals(MainActivity.TERCA_GAME)){
             return new TercaGame();
+        } else if(stringExtra.equals(MainActivity.TERCA_QUARTA_GAME)){
+            return new TercaQuartaGame();
         }
 
         Log.d(this.getPackageName(), "No Game Returned");
@@ -140,7 +143,7 @@ public class GameActivity extends Activity {
         state = GAME_END;
 
 
-
+        addPontuation();
         new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage(getString(R.string.finishQuestion).replace("{1}", points + "")).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -162,10 +165,11 @@ public class GameActivity extends Activity {
         SharedPreferences sharedPref = this.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        String records = getResources().getString(R.string.high_scores_string);
+        String records = sharedPref.getString(getString(R.string.high_scores_string), "");
         StringRecordHandle stringRecordHandle = new StringRecordHandle(records);
         stringRecordHandle.addRecord(points);
         SharedPreferences.Editor editor = sharedPref.edit();
+        Log.d("GameActivity", "Adicionando records: " + stringRecordHandle.getRecordString());
         editor.putString(getString(R.string.high_scores_string), stringRecordHandle.getRecordString());
         editor.commit();
     }
