@@ -2,12 +2,14 @@
     <string name="app_name">Music Game</string>
     <string name="title_activity_quartas_game">QuartasGameActivity</string>
     <string name="header">Level </string>
-    <string name="TercaGameQuestion"> "Which is the terca note of?"</string>
-    <string name="QuartaGameQuestion"> Which is the forth note of?"</string>
+    <string name="TercaGameQuestion"> "Which one is the third note of"</string>
+    <string name="QuartaGameQuestion"> Which one is the forth note of"</string>
     <string name="finishDialogTitle">Game Finished!</string>
     <string name="finishQuestion">Your pontuation was {1}. Do you want to play again?</string>
     <string name="selectText">Select Your Mode!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="title_activity_teste">TesteActivity</string>
+    <string name="preference_file_key">PREFERENCE_FILE_KEY</string>
+    <string name="high_scores_string">music.com.br.musicgame</string>
 </resources>

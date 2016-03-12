@@ -3,6 +3,7 @@ package music.com.br.musicgame;
 import org.junit.Test;
 
 import music.com.br.musicgame.entities.Note;
+import music.com.br.musicgame.entities.StringRecordHandle;
 
 import static org.junit.Assert.*;
 
@@ -43,6 +44,16 @@ public class NoteTest {
         assertEquals(note.quarta().toString(),"Bb");
 
 
+        note = new Note(Note.E);
+
+        assertEquals(note.toString(),"E");
+        assertEquals(note.terca().toString(),"G#");
+        assertEquals(note.quarta().toString(),"A");
+
+
+        note = new Note(Note.Gsus);
+        assertEquals(note.toString(),"G#");
+        assertEquals(note.quarta().toString(), "C#");
 
     }
 
@@ -54,5 +65,25 @@ public class NoteTest {
                 assertEquals(new Note(12*j+i), new Note(i));
             }
 
+    }
+
+    @Test
+    public void StringRecordHandleTest(){
+        StringRecordHandle stringRecordHandle = new StringRecordHandle("10;5;4;");
+
+        assertEquals(stringRecordHandle.getRecordString(),"10;5;4;");
+        stringRecordHandle.addRecord(6);
+        assertEquals(stringRecordHandle.getRecordString(), "10;6;5;4;");
+
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+        stringRecordHandle.addRecord(20);
+
+        assertEquals(stringRecordHandle.getRecordString(), "20;20;20;20;20;20;20;20;10;6;");
     }
 }

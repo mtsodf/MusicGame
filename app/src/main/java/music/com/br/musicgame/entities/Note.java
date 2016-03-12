@@ -34,30 +34,22 @@ public class Note {
     }
 
     public Note terca(){
-        return adicionarSemitons(increments[2]);
+        return escalaMaior(2);
     }
 
     public Note quarta(){
-        int pos = characterPosition(getCharacter());
-        pos +=3;
-        pos %= 8;
-
-        Note q = adicionarSemitons(increments[3]);
-
-        if(!q.getCharacter().equals(characters[pos])){
-            q.notacaoSustenida = false;
-        }
-
-        return q;
+        return escalaMaior(3);
 
     }
 
     public Note quinta(){
-        return adicionarSemitons(increments[4]);
+        return escalaMaior(4);
     }
 
+
+
     public String getCharacter(){
-        return toString().substring(0,1);
+        return toString().substring(0, 1);
     }
 
     private int characterPosition(String character){
@@ -70,7 +62,20 @@ public class Note {
         return pos;
     }
 
+    public Note escalaMaior(int posEscalaMaior){
+        int posEscalaDo = characterPosition(getCharacter());
+        posEscalaDo += posEscalaMaior;
+        posEscalaDo %= 7;
 
+        Note q = adicionarSemitons(increments[posEscalaMaior]);
+
+        if(!q.getCharacter().equals(characters[posEscalaDo])){
+            q.notacaoSustenida = false;
+        }
+
+        return q;
+
+    }
 
     public Note adicionarSemitons(int qtdSemitons) {
         return new Note((this.note + qtdSemitons) % 12);

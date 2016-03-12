@@ -2,7 +2,9 @@ package music.com.br.musicgame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import music.com.br.musicgame.entities.Game;
 import music.com.br.musicgame.entities.QuartasGame;
+import music.com.br.musicgame.entities.StringRecordHandle;
 import music.com.br.musicgame.entities.TercaGame;
 
 public class GameActivity extends Activity {
@@ -135,6 +138,9 @@ public class GameActivity extends Activity {
 
     private void endOfTheGame() {
         state = GAME_END;
+
+
+
         new AlertDialog.Builder(this).setTitle(getString(R.string.finishDialogTitle)).setMessage(getString(R.string.finishQuestion).replace("{1}", points + "")).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -148,6 +154,20 @@ public class GameActivity extends Activity {
                 GameActivity.this.finish();
             }
         }).show();
+
+
+    }
+
+    private void addPontuation(){
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        String records = getResources().getString(R.string.high_scores_string);
+        StringRecordHandle stringRecordHandle = new StringRecordHandle(records);
+        stringRecordHandle.addRecord(points);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.high_scores_string), stringRecordHandle.getRecordString());
+        editor.commit();
     }
 
     private void initiateGame(){
@@ -251,9 +271,7 @@ public class GameActivity extends Activity {
                         t.setTextColor(Color.GREEN);
                     }
                 }
-
                 alreadyRun = true;
-
             }
 
             @Override
