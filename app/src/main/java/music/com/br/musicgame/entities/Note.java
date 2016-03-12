@@ -23,24 +23,54 @@ public class Note {
 
     public static int[] increments = {0,2,4,5,7,9,11,12};
 
+    public static String[] characters = {"C","D","E","F","G","A","B"};
+
     int note;
+
+    boolean notacaoSustenida = true;
 
     public Note(int note){
         this.note = note % 12;
     }
-
 
     public Note terca(){
         return adicionarSemitons(increments[2]);
     }
 
     public Note quarta(){
-        return adicionarSemitons(increments[3]);
+        int pos = characterPosition(getCharacter());
+        pos +=3;
+        pos %= 8;
+
+        Note q = adicionarSemitons(increments[3]);
+
+        if(!q.getCharacter().equals(characters[pos])){
+            q.notacaoSustenida = false;
+        }
+
+        return q;
+
     }
 
     public Note quinta(){
         return adicionarSemitons(increments[4]);
     }
+
+    public String getCharacter(){
+        return toString().substring(0,1);
+    }
+
+    private int characterPosition(String character){
+        int pos = 0;
+
+        while(!character.equals(characters[pos])){
+            pos++;
+        }
+
+        return pos;
+    }
+
+
 
     public Note adicionarSemitons(int qtdSemitons) {
         return new Note((this.note + qtdSemitons) % 12);
@@ -52,25 +82,25 @@ public class Note {
             case 0:
                 return "C";
             case 1:
-                return "C#";
+                return notacaoSustenida?"C#":"Db";
             case 2:
                 return "D";
             case 3:
-                return "D#";
+                return notacaoSustenida?"D#":"Eb";
             case 4:
                 return "E";
             case 5:
                 return "F";
             case 6:
-                return "F#";
+                return notacaoSustenida?"F#":"Gb";
             case 7:
                 return "G";
             case 8:
-                return "G#";
+                return notacaoSustenida?"G#":"Ab";
             case 9:
                 return "A";
             case 10:
-                return "A#";
+                return notacaoSustenida?"A#":"Bb";
             case 11:
                 return "B";
         }

@@ -33,6 +33,20 @@ public class NoteTest {
     }
 
     @Test
+    public void notation_for_forths_and_third(){
+        Note note = new Note(Note.D);
+        assertEquals(note.toString(),"D");
+        assertEquals(note.terca().toString(), "F#");
+
+        note = new Note(Note.F);
+        assertEquals(note.toString(), "F");
+        assertEquals(note.quarta().toString(),"Bb");
+
+
+
+    }
+
+    @Test
     public void NoteEquals(){
         for(int i = 0; i < 12; i++)
             for(int j = 0; j < 3; j ++){
